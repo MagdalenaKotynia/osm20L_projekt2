@@ -1,6 +1,7 @@
 package osmProjekt2;
 
 import org.jfree.chart.*;
+import java.sql.*;
 
 public class Main {
 
