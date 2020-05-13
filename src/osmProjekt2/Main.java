@@ -6,7 +6,11 @@ import java.sql.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		DbConnector connector = new DbConnector();
+		connector.createTable();
+		//connector.insertIntoTable(2, "Jan", "Kowalski", 29, 'F', "1234567890");
+		//connector.printAll();
 
 	}
 
