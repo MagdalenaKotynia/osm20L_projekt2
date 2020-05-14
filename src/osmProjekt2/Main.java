@@ -9,8 +9,11 @@ public class Main {
 		
 		DbConnector connector = new DbConnector();
 		connector.createTable();
-		//connector.insertIntoTable(2, "Jan", "Kowalski", 29, 'F', "1234567890");
-		//connector.printAll();
+		connector.insertIntoTable(1, "Jan", "Kowalski", 29, "Mężczyzna", "1234567890");
+		connector.insertIntoTable(2, "Anna", "Kowalska", 22, "Kobieta", "1099876543");
+		connector.insertIntoTable(3, "Sebastian", "Gromelski", 11, "Mężczyzna", "1212364564");
+		connector.insertIntoTable(4, "Jarosław", "Poznalski", 65, "Mężczyzna", "4367684565");
+		connector.printAll();
 
 	}
 

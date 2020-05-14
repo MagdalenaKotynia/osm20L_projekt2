@@ -10,9 +10,10 @@ public class DbConnector {
 	
 	private static final String DRIVER = "org.hsqldb.jdbcDriver";
 	private static final String URL = "jdbc:hsqldb:data;create=true";
-	private static final String USER = "";
-	private static final String PASSWORD="";
 	Connection connection = null;
+    DatabaseMetaData	dbmd = null;		//obiekt przechowujacy informacje o bazie danych        	
+    Statement			statement=null;		//obiekt wykorzystywany do zapytan do bazy danych
+    ResultSet			result=null;
 	
 	
 	public DbConnector() {
@@ -28,6 +29,9 @@ public class DbConnector {
 				System.out.println("Połączono z bazą danych... ");
 			}
 			
+			dbmd = connection.getMetaData();
+			statement=connection.createStatement();
+			
 		}catch(SQLException | ClassNotFoundException e){
 			
 			
@@ -40,14 +44,34 @@ public class DbConnector {
 	public void createTable() {
 		
 		try {
-			connection.createStatement().execute( "Create TABLE PatientsTable("+
+			
+			result=dbmd.getTables(null,null,"PatientsTable",null);
+			if (!result.next()) {
+				
+				statement.execute( "CREATE TABLE Exams("+
+									"patient_id int NOT NULL PRIMARY KEY,"+
+									"pulse_id int NOT NULL,"+
+									"pressure_id int NOT NULL,)");
+			}
+			
+			
+			
+			
+			result=dbmd.getTables(null,null,"PatientsTable",null);
+			if (!result.next()) {
+            
+								statement.execute( "Create TABLE PatientsTable("+
 												  	"patient_id 	INT NOT NULL PRIMARY KEY,"+
-												  	"Name 			varchar(50),"+
-												  	"Surname 		varchar(50),"+
-												  	"Age 			INT," +
-												  	"Gender 		char(1),"+
-												  	"PESEL 			varchar(11),)");
-			System.out.println("Stworzono tabelę pacjentów... \n");
+												  	"Name 			varchar(50) NOT NULL,"+
+												  	"Surname 		varchar(50) NOT NULL,"+
+												  	"Age 			INT NOT NULL," +
+												  	"Gender 		varchar(10) NOT NULL,"+
+												  	"PESEL 			varchar(11) NOT NULL UNIQUE,)");
+								System.out.println("Stworzono tabelę pacjentów... \n");
+								}else {
+									System.out.println("Tabela Pacjentów juz istnieje");
+								}
+						
 		} catch (SQLException e) {
 			
 			// TODO Auto-generated catch block
@@ -57,11 +81,20 @@ public class DbConnector {
 	}
 	
 	
-	public void insertIntoTable(int id, String name, String surname, int age, char gender, String pesel) {
+	public void insertIntoTable(int id, String name, String surname, int age, String gender, String pesel) {
 		
 		try {
 			
-			connection.createStatement().execute("INSERT INTO PatientsTable(patient_id, Name, Surname, Age, Gender, Pesel) VALUES('"+id+","+name+","+surname+","+age+","+gender+","+pesel+"') ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PatientsTable VALUES(?,?,?,?,?,?)");
+			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, name);
+			preparedStatement.setString(3, surname);
+			preparedStatement.setInt(4, age);
+			preparedStatement.setString(5,  gender);
+			preparedStatement.setString(6,  pesel);
+			int x = preparedStatement.executeUpdate();
+			
+			
 			
 		} catch (SQLException e) {
 			
@@ -73,11 +106,11 @@ public class DbConnector {
 	
 	
 	public void printAll() {
-		Statement statement;
+		
 		
 		try {
 			
-			statement = this.connection.createStatement();
+			
 			ResultSet res = statement.executeQuery("Select * FROM PatientsTable");
 			while (res.next()) {
 				System.out.println(res.getString("patient_id") + " " + res.getString("Name") +
