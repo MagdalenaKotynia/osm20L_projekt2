@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.logging.Logger;
 
 import org.hsqldb.jdbcDriver;
+import java.beans.XMLEncoder;
+import java.beans.XMLDecoder;
+import java.io.File;
 
 public class DbConnector {
 	

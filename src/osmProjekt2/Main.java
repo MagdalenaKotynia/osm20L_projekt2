@@ -1,6 +1,8 @@
 package osmProjekt2;
 
 import org.jfree.chart.*;
+
+import java.awt.EventQueue;
 import java.sql.*;
 
 public class Main {
@@ -14,6 +16,19 @@ public class Main {
 		connector.insertIntoTable(3, "Sebastian", "Gromelski", 11, "Mężczyzna", "1212364564");
 		connector.insertIntoTable(4, "Jarosław", "Poznalski", 65, "Mężczyzna", "4367684565");
 		connector.printAll();
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI window = new GUI();
+					window.getFrame().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
 
 	}
 
