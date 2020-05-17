@@ -1,6 +1,6 @@
 package osmProjekt2;
 
-import org.jfree.chart.*;
+
 
 import java.awt.EventQueue;
 import java.sql.*;
