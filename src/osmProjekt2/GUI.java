@@ -11,10 +11,15 @@ import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -28,6 +33,8 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
+
+import com.sun.jdi.connect.spi.Connection;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -56,8 +63,13 @@ public class GUI {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	private JButton button_2;
+	private JButton button;
 	private JTable table;
 	private JTable table_1;
+	private JComboBox comboBox;
+	private DbConnector myDataBase;
+	
 
 	/**
 	 * Launch the application.
@@ -80,6 +92,8 @@ public class GUI {
 	 */
 	public GUI() {
 		initialize();
+		
+	
 	}
 
 	/**
@@ -134,12 +148,12 @@ public class GUI {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNewLabel_4, "cell 0 4,alignx left");
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(gender.values()));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(comboBox, "cell 1 4,growx");
 		
-		JButton button = new JButton("Save");
+		button = new JButton("Save");
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(button, "cell 0 5");
 		
@@ -176,7 +190,7 @@ public class GUI {
 		panel_1.add(textField_5, "cell 1 2,growx");
 		textField_5.setColumns(10);
 		
-		JButton button_2 = new JButton("Save");
+		button_2 = new JButton("Save");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(button_2, "cell 0 3");
 		
@@ -337,6 +351,34 @@ public class GUI {
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(getFrame(), popupMenu);
+		
+		myDataBase = new DbConnector();
+		myDataBase.createTable();
+		this.button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt)
+			{
+				try {
+					/*String query = "insert into myDataBase (patient_id, Name, Surname, Age, Gender, PESEL) values (?, ?, ?, ?, ?, ?)";
+					PreparedStatement pst=myDataBase.connection.prepareStatement(query);
+					pst.setInt(1, 1);
+					pst.setString(2, textField.getText());
+					pst.setString(3, textField_1.getText());
+					pst.setInt(4, 22);
+					pst.setString(5, comboBox.getSelectedItem().toString());
+					pst.setString(6, textField_3.getText());*/
+					myDataBase.insertIntoTable(8, textField.getText(), textField_1.getText(), 22, comboBox.getSelectedItem().toString(), textField_3.getText());
+					myDataBase.printAll();
+					//pst.execute();
+					JOptionPane.showMessageDialog(null, "Data saved");
+					
+					//pst.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					
+				}
+			}
+			});
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -355,7 +397,26 @@ public class GUI {
 			}
 		});
 	}
+	/*public void setController(ActionListener c)
+	{
+		this.textField.addActionListener(c);
+		this.textField_1.addActionListener(c);
+		this.textField_2.addActionListener(c);
+		this.textField_3.addActionListener(c);
+		this.comboBox.addActionListener(c);
+		this.button_2.addActionListener(c);
+	}*/
 
+	public void preparePatientFromform()
+	{
+		this.textField.getText();
+		this.textField_1.getText();
+		this.textField_2.getText();
+		this.comboBox.getSelectedItem();	
+	}
+	
+
+	
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -363,4 +424,5 @@ public class GUI {
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
+	
 }

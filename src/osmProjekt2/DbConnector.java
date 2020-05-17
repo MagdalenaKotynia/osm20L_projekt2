@@ -40,7 +40,7 @@ public class DbConnector {
 			
 			System.err.println(e.getMessage());
 		}
-	
+
 	}
 	
 	
@@ -64,7 +64,7 @@ public class DbConnector {
 			if (!result.next()) {
             
 								statement.execute( "Create TABLE PatientsTable("+
-												  	"patient_id 	INT NOT NULL PRIMARY KEY,"+
+												  	"patient_id 	int NOT NULL PRIMARY KEY,"+
 												  	"Name 			varchar(50) NOT NULL,"+
 												  	"Surname 		varchar(50) NOT NULL,"+
 												  	"Age 			INT NOT NULL," +
