@@ -266,37 +266,31 @@ public class GUI {
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"collection_id", "patient_id", "Name", "Surname", "Age", "Gender", "PESEL"
+				"patient_id", "Name", "Surname", "Age", "Gender", "PESEL"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Integer.class, Integer.class, String.class, String.class, Integer.class, String.class, String.class
+				Integer.class, String.class, String.class, Integer.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -326,7 +320,7 @@ public class GUI {
 				{null, null, null, null, null},
 			},
 			new String[] {
-				"collection_id", "exam_id", "Date", "Pressure ", "Pulse"
+				"patient_id", "exam_id", "Date", "Pressure ", "Pulse"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -334,12 +328,6 @@ public class GUI {
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
 			}
 		});
 		scrollPane_1.setViewportView(table_1);
@@ -366,7 +354,7 @@ public class GUI {
 					pst.setInt(4, 22);
 					pst.setString(5, comboBox.getSelectedItem().toString());
 					pst.setString(6, textField_3.getText());*/
-					myDataBase.insertIntoTable(8, textField.getText(), textField_1.getText(), 22, comboBox.getSelectedItem().toString(), textField_3.getText());
+					myDataBase.insertIntoTable(textField.getText(), textField_1.getText(), 22, comboBox.getSelectedItem().toString(), textField_3.getText());
 					myDataBase.printAll();
 					//pst.execute();
 					JOptionPane.showMessageDialog(null, "Data saved");
@@ -397,24 +385,7 @@ public class GUI {
 			}
 		});
 	}
-	/*public void setController(ActionListener c)
-	{
-		this.textField.addActionListener(c);
-		this.textField_1.addActionListener(c);
-		this.textField_2.addActionListener(c);
-		this.textField_3.addActionListener(c);
-		this.comboBox.addActionListener(c);
-		this.button_2.addActionListener(c);
-	}*/
 
-	public void preparePatientFromform()
-	{
-		this.textField.getText();
-		this.textField_1.getText();
-		this.textField_2.getText();
-		this.comboBox.getSelectedItem();	
-	}
-	
 
 	
 	public JFrame getFrame() {
