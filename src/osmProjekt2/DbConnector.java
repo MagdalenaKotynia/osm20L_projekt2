@@ -53,7 +53,7 @@ public class DbConnector {
 			if (!result.next()) {
             
 								statement.execute( "Create TABLE PatientsTable("+
-												  	"patient_id INTEGER IDENTITY PRIMARY KEY,"+
+												  	"patient_id IDENTITY(1,1) PRIMARY KEY,"+
 												  	"Name 		VARCHAR(50) NOT NULL,"+
 												  	"Surname 	VARCHAR(50) NOT NULL,"+
 												  	"Age 		INTEGER NOT NULL," +
@@ -99,14 +99,13 @@ public class DbConnector {
 	public void insertIntoTable(String name, String surname, int age, String gender, String pesel) {
 		
 		try {
-			
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PatientsTable VALUES(?,?,?,?,?,?)");
-			//preparedStatement.setInt(1, id);
-			preparedStatement.setString(2, name);
-			preparedStatement.setString(3, surname);
-			preparedStatement.setInt(4, age);
-			preparedStatement.setString(5,  gender);
-			preparedStatement.setString(6,  pesel);
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PatientsTable VALUES(default,name,surname,age,gender,pesel)");
+			//preparedStatement.setInt(1, );
+			/*preparedStatement.setString(1, name);
+			preparedStatement.setString(2, surname);
+			preparedStatement.setInt(3, age);
+			preparedStatement.setString(4,  gender);
+			preparedStatement.setString(5,  pesel);*/
 			int x = preparedStatement.executeUpdate();
 			
 			

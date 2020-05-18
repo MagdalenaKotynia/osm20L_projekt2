@@ -346,9 +346,9 @@ public class GUI {
 			public void actionPerformed(ActionEvent evt)
 			{
 				try {
-					/*String query = "insert into myDataBase (patient_id, Name, Surname, Age, Gender, PESEL) values (?, ?, ?, ?, ?, ?)";
+					/*String query = "INSERT INTO myDataBase (patient_id, Name, Surname, Age, Gender, PESEL) VALUES (default, ?, ?, ?, ?, ?)";
 					PreparedStatement pst=myDataBase.connection.prepareStatement(query);
-					pst.setInt(1, 1);
+					//pst.setInt(1, 1);
 					pst.setString(2, textField.getText());
 					pst.setString(3, textField_1.getText());
 					pst.setInt(4, 22);
