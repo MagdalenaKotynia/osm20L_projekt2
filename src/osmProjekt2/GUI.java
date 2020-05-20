@@ -68,7 +68,7 @@ public class GUI {
 	private JTable table;
 	private JTable table_1;
 	private JComboBox comboBox;
-	private DbConnector myDataBase;
+	
 	
 
 	/**
@@ -340,33 +340,8 @@ public class GUI {
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(getFrame(), popupMenu);
 		
-		myDataBase = new DbConnector();
-		myDataBase.createTable();
-		this.button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt)
-			{
-				try {
-					/*String query = "INSERT INTO myDataBase (patient_id, Name, Surname, Age, Gender, PESEL) VALUES (default, ?, ?, ?, ?, ?)";
-					PreparedStatement pst=myDataBase.connection.prepareStatement(query);
-					//pst.setInt(1, 1);
-					pst.setString(2, textField.getText());
-					pst.setString(3, textField_1.getText());
-					pst.setInt(4, 22);
-					pst.setString(5, comboBox.getSelectedItem().toString());
-					pst.setString(6, textField_3.getText());*/
-					myDataBase.insertIntoTable(textField.getText(), textField_1.getText(), 22, comboBox.getSelectedItem().toString(), textField_3.getText());
-					myDataBase.printAll();
-					//pst.execute();
-					JOptionPane.showMessageDialog(null, "Data saved");
-					
-					//pst.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-					
-				}
-			}
-			});
+		
+		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
