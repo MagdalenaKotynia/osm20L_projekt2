@@ -60,7 +60,7 @@ public class PatientTable extends DbTable {
 		boolean status = false;
 		
 		try {
-			 prstInsert.setInt(1, id);
+			 prstInsert.setInt(1, id);			// .setNull(x, Types.INTEGER); ??????
 			 prstInsert.setString(2, name);
 			 prstInsert.setString(3, surname);
 			 prstInsert.setInt(4, age);

@@ -74,7 +74,7 @@ public class DbTable {
 		}
 		
 		new PatientTable();
-	//	new ExamTable();
+		new ExamTable();
 		
 		
 	}
