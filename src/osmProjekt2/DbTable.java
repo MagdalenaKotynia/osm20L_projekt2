@@ -74,7 +74,7 @@ public class DbTable {
 		}
 		
 		new PatientTable();
-		new ExamTable();
+		//new ExamTable();
 		
 		
 	}
@@ -222,11 +222,64 @@ public class DbTable {
 		
 	}
 	
-	static DbTable getInstance() {
-		return instance;
+	//returns an ArrayList of all the elements in a table. All our objects implements GetSetId
+	
+	protected ArrayList<GetSetId> sqlSelectAll() {
+		ArrayList<GetSetId> al = new ArrayList<GetSetId>();
+		ResultSet rs = queryExecute(prstSelectAll);
+		try {
+			//scan the ResultSet to extract all FirstName
+			while(rs.next()) {
+				GetSetId obj = (GetSetId)
+						rs.getObject(1); //get next object in column 1
+				int id = rs.getInt(2); //get its id in column 2
+				obj.setId(id); //set the object Id into the transient instance variable
+				al.add(obj); // added to the array list
+			}
+			//free the resources of the working set
+			rs.close();
+		}
+		catch(SQLException e) {
+			System.out.println("DbTable.selectAll(exception: " + e + "for" + prstSelectAll);
+			
+			}
+		return al;
+		}
+	//delete an object from the database
+	boolean sqlDelete(GetSetId obj) {
+		try {
+			prstDelete.setInt(1, obj.getId());
+			return statementExecute(prstDelete) > 0;
+		}
+		catch(SQLException e) {
+			System.out.println("DbTable.deleteById exception: " + e);
+		
+		}
+		//obviously didn't work
+		return false;
 	}
-	
-
-	
-	
+	/*returns a row by its Id. The classes that call this method will cast the GetSetId object to "the object they served*/
+	GetSetId sqlGetById(int id) {
+		try {
+		prstGetById.setInt(1, id);
+		ResultSet rs = queryExecute(prstGetById);
+		if(rs == null)
+			return null;
+		if(!rs.next())
+			return null;
+		GetSetId obj = (GetSetId)rs.getObject(1); //get next object in column 1
+		obj.setId(id);
+		return obj;
+		
+	}
+	catch(SQLException e) {
+		System.out.println("sqlGetById exception for Id: " + id + "Error: "+ e);
+		
+	}
+	return null;
+}
+//returns the Connection object to the DB
+static DbTable getInstance() {
+	return instance;
+}
 }

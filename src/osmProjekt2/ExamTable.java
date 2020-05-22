@@ -7,11 +7,11 @@ public class ExamTable extends DbTable {
 	private static final String tableName = "ExamTable";
 	private static final String createTable = 
 			"Create Cached Table " + tableName + " (" +
-			"patientId INTEGER NOT NULL, " +
+			"patientId INTEGER, " +
 			"exam_id INTEGER IDENTITY PRIMARY KEY, " +
-			"exam_date DATE NOT NULL, " +
-			"pulse_value INTEGER NOT NULL, " +
-			"pressure_value INTEGER NOT NULL, " +
+			"exam_date DATE, " +
+			"pulse_value INTEGER, " +
+			"pressure_value INTEGER, " +
 			"FOREIGN KEY (patientId) REFERENCES PatientTable (patient_id), " +
 			"UNIQUE (exam_id)" +
 			");";
@@ -42,7 +42,10 @@ public class ExamTable extends DbTable {
 			throw new IllegalStateException("Problem creating PreparedStatement for " + tableName + ".");
 			
 		}
-		
+		//if the table didnt exist we fill it with predefined elements
+				if(!tableExisted) {
+					System.out.println("Table doesnt exist");
+				}
 		
 		
 	}
