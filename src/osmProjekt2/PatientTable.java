@@ -20,8 +20,8 @@ public class PatientTable extends DbTable {
 			"Age 		INTEGER NOT NULL, " +
 			"Gender 	VARCHAR(10) NOT NULL, " +
 			"PESEL 		VARCHAR(11) NOT NULL, " +
-			"UNIQUE (patient_id)," +
-			"UNIQUE (PESEL), " +
+			"UNIQUE (Patient_id)," +
+			"UNIQUE (PESEL) " +
 			");";
 	
 	
@@ -87,10 +87,10 @@ public class PatientTable extends DbTable {
 		try {
 			prstInsert.setObject(1, patient, Types.JAVA_OBJECT);
 			prstInsert.setNull(2,  Types.INTEGER);
-			prstInsert.setString(3, patient.getName());
-			prstInsert.setString(4,  patient.getSurname());
+			prstInsert.setString(3, patient.getName().toUpperCase());
+			prstInsert.setString(4,  patient.getSurname().toUpperCase());
 			prstInsert.setInt(5, patient.getAge());
-			prstInsert.setString(6, patient.getGender());
+			prstInsert.setString(6, patient.getGender().toUpperCase());
 			prstInsert.setString(7, patient.getPesel());
 			
 			//perform the insert statement

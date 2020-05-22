@@ -1,6 +1,8 @@
 package osmProjekt2;
 
 import java.sql.*;
+import java.util.*;
+
 import java.util.ArrayList;
 
 public class DbTable {
