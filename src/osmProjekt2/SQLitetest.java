@@ -65,25 +65,42 @@ public class SQLitetest {
 				
 				if(!res.next()) {
 				
-				Statement state2 = con.createStatement();
-				state2.execute("CREATE TABLE patient(id integer,"
+				Statement state1 = con.createStatement();
+				state1.execute("CREATE TABLE patient(patient_id integer,"
 						+"name varchar(60),"+
-						"surname varchar(60),"
-						+"primary key(id)"+
+						"surname varchar(60),"+
+						"age integer,"+
+						"gender varchar(10),"+
+						"pesel varchar(11) UNIQUE,"+
+						"primary key(patient_id)"+
+						")");
+				
+				Statement state2 = con.createStatement();
+				state2.execute("CREATE TABLE exam(id integer,"
+						+"date real,"+
+						"pulse integer,"+
+						"pressure integer,"+
+						"patient_id integer,"+
+						"CONSTRAINT fk_patient,"+
+						"FOREIGN KEY (patient_id)"
+						+ "REFERENCES patient(patient_id)"+
+						"primary key(id)"+
 						")");
 				}
 				
 				// sample data
 				
-				PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname) values(?,?);");
+	/*			PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname, age, gender, pesel) values(?,?,?,?,?);");
 				prep.setString(1, "Jan");
 				prep.setString(2, "Kowalski");
+				prep.setInt(3,  23);
 				prep.execute();
 				
-				PreparedStatement prep2 = con.prepareStatement("INSERT INTO patient(name, surname) values(?,?);");
+				PreparedStatement prep2 = con.prepareStatement("INSERT INTO patient(name, surname, age) values(?,?,?);");
 				prep2.setString(1, "Zbigniew");
 				prep2.setString(2, "Wawrzyniak");
-				prep2.execute();
+				prep2.setInt(3,  55);
+				prep2.execute();*/
 				
 				
 			} catch (SQLException e) {
@@ -99,14 +116,17 @@ public class SQLitetest {
 		
 	}
 	
-	public void addUser(String name, String surname) {
+	public void addUser(String name, String surname, int age, String gender, String pesel) {
 		if(con==null) {
 			getConnection();
 		}
 		try {
-			PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname) values(?,?);");
+			PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname, age, gender, pesel) values(?,?,?,?,?);");
 			prep.setString(1, name);
 			prep.setString(2, surname);
+			prep.setInt(3, age);
+			prep.setString(4, gender);
+			prep.setString(5, pesel);
 			prep.execute();
 			
 		} catch (SQLException e) {

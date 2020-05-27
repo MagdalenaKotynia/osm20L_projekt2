@@ -93,6 +93,4 @@ public class Patient implements GetSetId, Serializable {
 		return patientTable.sqlInsert(this);
 	}
 	
-	
-	
 }

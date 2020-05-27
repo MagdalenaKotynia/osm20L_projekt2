@@ -13,7 +13,8 @@ public class Main {
 		// DbTable.getInstance().statementExecute("SHUTDOWN COMPACT;");
 
 		SQLitetest test = new SQLitetest();
-		test.addUser("Robert", "Żera");
+		test.addUser("Robert", "Żera", 34, "Male", "12334534287");
+		test.addUser("Magdalena", "Kotynia", 22, "Female", "54637281982");
 		ResultSet rs;
 		rs = test.displayUsers();
 		
