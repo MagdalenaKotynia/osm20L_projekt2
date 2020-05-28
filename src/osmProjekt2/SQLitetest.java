@@ -241,6 +241,58 @@ public class SQLitetest {
 		
 	}
 	
+	public ResultSet selectPatientsExamCard(int patient_id){
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM exam WHERE patient_id = ?");
+			prep.setInt(1,	patient_id);
+			ResultSet res = prep.executeQuery();
+		
+			/*while (res.next())
+	        	System.out.println(res.getInt("pressure") + "\t" + res.getInt("patient_id"));
+			if(!res.next())
+			System.out.println("cos nie pyka");
+			prep.execute();
+			prep.close();*/
+			return res;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+public void displayPatientsExams(int patientId) {
+		
+		if (con==null) {
+			getConnection();
+		}
+		
+		Statement state;
+		try {
+			state = con.createStatement();
+			
+			ResultSet res = state.executeQuery("SELECT * FROM exam WHERE patient_id = 'patientId'");
+			
+			while (res.next())
+	        	System.out.println(res.getInt("id") + "\t" + res.getInt("patient_id"));
+			if(!res.next())
+			System.out.println("cos nie pyka");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+		
+		
+	
+	
 	
 	
 }
