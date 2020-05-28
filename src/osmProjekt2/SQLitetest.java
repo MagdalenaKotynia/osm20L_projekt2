@@ -33,13 +33,14 @@ public class SQLitetest {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		try {
 			con = DriverManager.getConnection("jdbc:sqlite:SQLiteTest.db");
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -58,10 +59,8 @@ public class SQLitetest {
 			try {
 				Statement state = con.createStatement();
 				ResultSet res = state.executeQuery("SELECT name FROM patient;");
-				
-				//if (!res.next()) {
-				//	System.out.println("Tworzenie tabeli...");
-				//}
+
+
 				
 				if(!res.next()) {
 				
@@ -83,28 +82,15 @@ public class SQLitetest {
 						"patient_id integer,"+
 						"CONSTRAINT fk_patient,"+
 						"FOREIGN KEY (patient_id)"
-						+ "REFERENCES patient(patient_id)"+
+						+ "REFERENCES patient(patient_id) ON DELETE CASCADE"+
 						"primary key(id)"+
+						"PRAGMA foreign_keys = ON;"+
 						")");
 				}
 				
-				// sample data
-				
-	/*			PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname, age, gender, pesel) values(?,?,?,?,?);");
-				prep.setString(1, "Jan");
-				prep.setString(2, "Kowalski");
-				prep.setInt(3,  23);
-				prep.execute();
-				
-				PreparedStatement prep2 = con.prepareStatement("INSERT INTO patient(name, surname, age) values(?,?,?);");
-				prep2.setString(1, "Zbigniew");
-				prep2.setString(2, "Wawrzyniak");
-				prep2.setInt(3,  55);
-				prep2.execute();*/
-				
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
@@ -121,6 +107,7 @@ public class SQLitetest {
 			getConnection();
 		}
 		try {
+
 			PreparedStatement prep = con.prepareStatement("INSERT INTO patient(name, surname, age, gender, pesel) values(?,?,?,?,?);");
 			prep.setString(1, name);
 			prep.setString(2, surname);
@@ -128,9 +115,127 @@ public class SQLitetest {
 			prep.setString(4, gender);
 			prep.setString(5, pesel);
 			prep.execute();
+			prep.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void addExam(String date, int pulse, int pressure, int patient_id) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			PreparedStatement prep = con.prepareStatement("INSERT INTO exam(date, pulse, pressure, patient_id) values(?,?,?,?);");
+			prep.setString(1, date);
+			prep.setInt(2, pulse);
+			prep.setInt(3, pressure);
+			prep.setInt(4, patient_id);
+			prep.execute();
+			prep.close();
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public void deletePatient(int patientId) { 
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("DELETE FROM patient WHERE patient_id=?;");
+			prep.setInt(1, patientId);
+			prep.execute();
+			prep.close();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	// nie wiem czemu kaskadowe usuwanie nie dziala ale imo to by byl tylko taki bajer mozemy obejsc sie bez tego 
+	public void deleteExam(int patientId) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE patient_id=?;");
+			prep.setInt(1, patientId);
+			prep.execute();
+			prep.close();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updatePatient(int patientId, String name, String surname, int age, String gender, String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("UPDATE patient SET name=?, surname=?, age=?, gender=?, pesel=? WHERE patient_id=?");
+			prep.setString(1, name);
+			prep.setString(2, surname);
+			prep.setInt(3, age);
+			prep.setString(4,  gender);
+			prep.setString(5,  pesel);
+			prep.setInt(6, patientId);
+			prep.execute();
+			prep.close();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public void updateExam(int patientId, String date, int pulse, int pressure, int id) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("UPDATE patient SET date=?, pulse=?, pressure=?, patient_id=? WHERE id=?");
+			prep.setString(1, date);
+			prep.setInt(2, pulse);
+			prep.setInt(3, pressure);
+			prep.setInt(4,  patientId);
+			prep.setInt(5,  id);
+			prep.execute();
+			prep.close();
+			
+			
+		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		}
 		

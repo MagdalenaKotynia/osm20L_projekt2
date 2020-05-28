@@ -9,12 +9,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		//new DbTable("DICdb");
-		// DbTable.getInstance().statementExecute("SHUTDOWN COMPACT;");
+
 
 		SQLitetest test = new SQLitetest();
-		test.addUser("Robert", "Żera", 34, "Male", "12334534287");
-		test.addUser("Magdalena", "Kotynia", 22, "Female", "54637281982");
+
+		//test.addUser("Eryk", "Kowalski", 22, "Male", "1234567897654");
+		//test.deleteExam(2);
+		//test.updatePatient(1, "Jan", "Kostuszewwski", 12, "FEMALE", "123456457");
+
 		ResultSet rs;
 		rs = test.displayUsers();
 		
