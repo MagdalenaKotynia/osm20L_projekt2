@@ -17,6 +17,7 @@ public class SQLitetest {
 		try {
 			state = con.createStatement();
 			ResultSet res = state.executeQuery("SELECT name, surname FROM patient");
+			
 			return res;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

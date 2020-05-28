@@ -68,7 +68,7 @@ public class GUI {
 	private JTable table;
 	private JTable table_1;
 	private JComboBox comboBox;
-	
+	private SQLitetest db;
 	
 
 	/**
@@ -339,8 +339,22 @@ public class GUI {
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(getFrame(), popupMenu);
-		
-		
+		db = new SQLitetest();
+		this.button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				try {
+					String agetxt = textField_2.getText();
+					int age = Integer.parseInt(agetxt);
+					db.addUser(textField.getText(), textField_1.getText(), age, comboBox.getSelectedItem().toString(), textField_3.getText());
+					db.displayUsers();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					
+				}
+
+			}
+		});
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
