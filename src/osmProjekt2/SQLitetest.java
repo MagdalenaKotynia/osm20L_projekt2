@@ -251,13 +251,6 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT * FROM exam WHERE patient_id = ?");
 			prep.setInt(1,	patient_id);
 			ResultSet res = prep.executeQuery();
-		
-			/*while (res.next())
-	        	System.out.println(res.getInt("pressure") + "\t" + res.getInt("patient_id"));
-			if(!res.next())
-			System.out.println("cos nie pyka");
-			prep.execute();
-			prep.close();*/
 			return res;
 		} catch (SQLException e) {
 			
@@ -267,28 +260,20 @@ public class SQLitetest {
 		
 	}
 	
-public void displayPatientsExams(int patientId) {
-		
-		if (con==null) {
+	public ResultSet getSelectedPatientsId(String pesel) {
+		if(con==null) {
 			getConnection();
 		}
-		
-		Statement state;
 		try {
-			state = con.createStatement();
-			
-			ResultSet res = state.executeQuery("SELECT * FROM exam WHERE patient_id = 'patientId'");
-			
-			while (res.next())
-	        	System.out.println(res.getInt("id") + "\t" + res.getInt("patient_id"));
-			if(!res.next())
-			System.out.println("cos nie pyka");
+			PreparedStatement prep = con.prepareStatement("SELECT patient_id FROM patient WHERE pesel = ?");
+			prep.setString(1,	pesel);
+			ResultSet res = prep.executeQuery();
+			return res;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-
-
+		
 	}
 		
 		

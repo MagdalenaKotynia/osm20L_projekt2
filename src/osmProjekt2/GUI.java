@@ -51,24 +51,24 @@ import javax.swing.JScrollBar;
 public class GUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	protected JTextField textField;
+	protected JTextField textField_1;
+	protected JTextField textField_2;
+	protected JTextField textField_3;
+	protected JTextField textField_4;
+	protected JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	private JButton button_2;
-	private JButton button;
+	protected JButton button_2;
+	protected JButton button;
 	private JTable table;
 	private JTable table_1;
-	private JComboBox comboBox;
-	private SQLitetest db;
+	protected JComboBox comboBox;
+	protected JDateChooser dateChooser;
 	
 
 	/**
@@ -171,7 +171,7 @@ public class GUI {
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_5, "cell 0 0,growx,aligny top");
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		panel_1.add(dateChooser, "cell 1 0,growx,aligny top");
 		
 		JLabel lblNewLabel_6 = new JLabel("Pressure:");
@@ -339,22 +339,6 @@ public class GUI {
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(getFrame(), popupMenu);
-		db = new SQLitetest();
-		this.button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				try {
-					String agetxt = textField_2.getText();
-					int age = Integer.parseInt(agetxt);
-					db.addUser(textField.getText(), textField_1.getText(), age, comboBox.getSelectedItem().toString(), textField_3.getText());
-					db.displayUsers();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-					
-				}
-
-			}
-		});
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -383,6 +367,10 @@ public class GUI {
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	public void setController (ActionListener c) {
+		this.button.addActionListener(c);
+		this.button_2.addActionListener(c);
 	}
 	
 }
