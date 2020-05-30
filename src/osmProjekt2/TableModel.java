@@ -1,5 +1,6 @@
 package osmProjekt2;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.table.AbstractTableModel;
@@ -36,28 +37,58 @@ public class TableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		
 		Object temp = null;
-		rowIndex++;
+		
 		
 		try {
 		if(columnIndex==0) {
 			
-			temp = data.getPatient(rowIndex).getString("name");
+			ResultSet rs = data.getPatient();
+			
+			for(int i=0; i<=rowIndex; i++) {
+				rs.next();
+			}
+			
+			temp = rs.getString("name");
 			
 		}else if(columnIndex==1) {
 			
-			temp = data.getPatient(rowIndex).getString("surname");
+			ResultSet rs = data.getPatient();
+			
+			for(int i=0; i<=rowIndex; i++) {
+				rs.next();
+			}
+			
+			temp = rs.getString("surname");
 			
 		}else if(columnIndex==2) {
 			
-			temp = data.getPatient(rowIndex).getString("age");
+			ResultSet rs = data.getPatient();
+			
+			for(int i=0; i<=rowIndex; i++) {
+				rs.next();
+			}
+			
+			temp = rs.getString("age");
 			
 		}else if(columnIndex==3) {
 			
-			temp = data.getPatient(rowIndex).getString("gender");
+			ResultSet rs = data.getPatient();
+			
+			for(int i=0; i<=rowIndex; i++) {
+				rs.next();
+			}
+			
+			temp = rs.getString("gender");
 			
 		}else if(columnIndex==4) {
 			
-			temp = data.getPatient(rowIndex).getString("pesel");
+			ResultSet rs = data.getPatient();
+			
+			for(int i=0; i<=rowIndex; i++) {
+				rs.next();
+			}
+			
+			temp = rs.getString("pesel");
 			
 		}
 		return temp;

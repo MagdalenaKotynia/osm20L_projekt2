@@ -297,7 +297,7 @@ public class SQLitetest {
 				
 	}
 	
-	public ResultSet getPatient(int patient_id) {
+	public ResultSet getPatient() {
 		
 		if(con==null) {
 			getConnection();
@@ -305,8 +305,7 @@ public class SQLitetest {
 		
 		try {
 			
-			PreparedStatement prep = con.prepareStatement("SELECT * FROM patient WHERE patient_id = ?");
-			prep.setInt(1,	patient_id);
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM patient");
 			ResultSet res = prep.executeQuery();
 			return res;
 			
