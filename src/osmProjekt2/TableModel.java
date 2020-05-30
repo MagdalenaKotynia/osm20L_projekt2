@@ -24,7 +24,7 @@ public class TableModel extends AbstractTableModel {
 			size=data.getPatientRowCount();
 		}
 		
-		return size-1;
+		return size;
 		
 	}
 	
@@ -85,6 +85,7 @@ public class TableModel extends AbstractTableModel {
 	
 	public void setValueAt(SQLitetest data, int row, int col) {
 		
+		// IT IS UNFINISHED BTW
 		fireTableCellUpdated(row, col);
 		
 	}

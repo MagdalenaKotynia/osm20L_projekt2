@@ -330,39 +330,7 @@ public class SQLitetest {
 	
 	
 	
-	
-	public void updatePatientTable() {
-		
-		if(con==null) {
-			getConnection();
-		}
-		String sql ="SELECT name, surname, age, gender, pesel FROM patient";
-		
-		try {
-			PreparedStatement prep = con.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			Object[] columnData = new Object[5];
-			
-			while(rs.next()) {
-				
-				columnData [0] =rs.getString("name");
-				columnData [1] =rs.getString("surname");
-				columnData [2] =rs.getString("age");
-				columnData [3] =rs.getString("gender");
-				columnData [4] =rs.getString("pesel");
-			}
-			
-			
-		}catch(SQLException e) {
-			
-			e.printStackTrace();
-			
-		}
-		
-		
-		
-		
-	}
+
 		
 		
 	
