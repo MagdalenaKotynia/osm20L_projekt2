@@ -47,6 +47,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import javax.swing.JScrollBar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUI {
 
@@ -69,6 +70,9 @@ public class GUI {
 	private JTable table_1;
 	protected JComboBox comboBox;
 	protected JDateChooser dateChooser;
+	protected SQLitetest mData;
+	protected TableModel tableModel;
+	
 	
 
 	/**
@@ -103,201 +107,354 @@ public class GUI {
 		setFrame(new JFrame());
 		getFrame().setBounds(100, 100, 840, 558);
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getFrame().getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		panel.setBounds(10, 10, 193, 167);
-		getFrame().getContentPane().add(panel);
-		panel.setLayout(new MigLayout("", "[61px][74px,grow]", "[19px][13px][][][][][]"));
 		
 		JLabel lblNewLabel = new JLabel("Name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		panel.add(lblNewLabel, "cell 0 0,growx,aligny center");
 		
 		textField = new JTextField();
-		panel.add(textField, "cell 1 0,growx,aligny top");
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Surname:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(lblNewLabel_1, "cell 0 1,alignx left,aligny top");
 		
 		textField_1 = new JTextField();
-		panel.add(textField_1, "cell 1 1,growx");
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Age:\r\n");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(lblNewLabel_2, "cell 0 2,alignx left");
 		
 		textField_2 = new JTextField();
-		panel.add(textField_2, "cell 1 2,growx");
 		textField_2.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("PESEL:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(lblNewLabel_3, "cell 0 3,alignx left");
 		
 		textField_3 = new JTextField();
-		panel.add(textField_3, "cell 1 3,growx");
 		textField_3.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Gender:\r\n");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(lblNewLabel_4, "cell 0 4,alignx left");
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(gender.values()));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(comboBox, "cell 1 4,growx");
 		
 		button = new JButton("Save");
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(button, "cell 0 5");
 		
 		JButton button_1 = new JButton("Cancel");
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel.add(button_1, "cell 1 5");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+							.addGap(42))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+							.addGap(19))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBox, 0, 115, Short.MAX_VALUE)
+							.addGap(6)))
+					.addGap(0))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(8)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField)))
+					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_1)))
+					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_2)))
+					.addGap(4)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_3)))
+					.addGap(7)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(6)
+							.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(comboBox))
+					.addGap(7)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(button_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(13))
+		);
+		panel.setLayout(gl_panel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		panel_1.setBounds(10, 187, 193, 116);
-		getFrame().getContentPane().add(panel_1);
-		panel_1.setLayout(new MigLayout("", "[63px][104px,grow]", "[19px][][][][]"));
 		
 		JLabel lblNewLabel_5 = new JLabel("Date:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_5, "cell 0 0,growx,aligny top");
 		
 		dateChooser = new JDateChooser();
-		panel_1.add(dateChooser, "cell 1 0,growx,aligny top");
 		
 		JLabel lblNewLabel_6 = new JLabel("Pressure:");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_6, "cell 0 1,alignx left");
 		
 		textField_4 = new JTextField();
-		panel_1.add(textField_4, "cell 1 1,growx");
 		textField_4.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("Pulse:");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_7, "cell 0 2,alignx left");
 		
 		textField_5 = new JTextField();
-		panel_1.add(textField_5, "cell 1 2,growx");
 		textField_5.setColumns(10);
 		
 		button_2 = new JButton("Save");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(button_2, "cell 0 3");
 		
 		JButton button_3 = new JButton("Cancel");
 		button_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(button_3, "cell 1 3");
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(button_2, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(button_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(35))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(9)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_4, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+								.addComponent(textField_5, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
+					.addGap(7))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(2))
+						.addComponent(dateChooser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(4)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_4)))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(5)
+							.addComponent(textField_5))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3)))
+					.addGap(4)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(button_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(3))
+		);
+		panel_1.setLayout(gl_panel_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		panel_2.setBounds(10, 313, 193, 162);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(new MigLayout("", "[55px][96px,grow]", "[24px][][][][][]"));
 		
 		JLabel lblNewLabel_8 = new JLabel("Min Pressure:");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_8, "cell 0 0,alignx left,growy");
 		
 		textField_6 = new JTextField();
 		textField_6.setEditable(false);
-		panel_2.add(textField_6, "cell 1 0,alignx left,aligny center");
 		textField_6.setColumns(10);
 		
 		JLabel lblNewLabel_9 = new JLabel("Max Pressure:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_9, "cell 0 1,alignx left");
 		
 		textField_7 = new JTextField();
 		textField_7.setEditable(false);
-		panel_2.add(textField_7, "cell 1 1,growx");
 		textField_7.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("Avg. Pressure:");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_10, "cell 0 2,alignx left");
 		
 		textField_8 = new JTextField();
 		textField_8.setEditable(false);
-		panel_2.add(textField_8, "cell 1 2,growx");
 		textField_8.setColumns(10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Min Pulse:");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_11, "cell 0 3,alignx left");
 		
 		textField_9 = new JTextField();
 		textField_9.setEditable(false);
-		panel_2.add(textField_9, "cell 1 3,growx");
 		textField_9.setColumns(10);
 		
 		JLabel lblNewLabel_12 = new JLabel("Max Pulse:");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_12, "cell 0 4,alignx left");
 		
 		textField_10 = new JTextField();
 		textField_10.setEditable(false);
-		panel_2.add(textField_10, "cell 1 4,growx");
 		textField_10.setColumns(10);
 		
 		JLabel lblNewLabel_13 = new JLabel("Avg. Pulse:");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_13, "cell 0 5,alignx left");
 		
 		textField_11 = new JTextField();
 		textField_11.setEditable(false);
-		panel_2.add(textField_11, "cell 1 5,growx");
 		textField_11.setColumns(10);
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_8, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+							.addGap(9)
+							.addComponent(textField_6, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_9, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+							.addGap(6)
+							.addComponent(textField_7, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_10, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(textField_8, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_11, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+							.addGap(29)
+							.addComponent(textField_9, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_12, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+							.addGap(26)
+							.addComponent(textField_10, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_13, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+							.addGap(24)
+							.addComponent(textField_11, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
+					.addGap(7))
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_8, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(3)
+							.addComponent(textField_6)
+							.addGap(2)))
+					.addGap(4)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_9, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_7)))
+					.addGap(4)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_10, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_8)))
+					.addGap(4)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_11, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_9)))
+					.addGap(4)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_12, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_10)))
+					.addGap(4)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(lblNewLabel_13, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_11)))
+					.addGap(18))
+		);
+		panel_2.setLayout(gl_panel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(213, 10, 603, 167);
-		frame.getContentPane().add(scrollPane);
 		
-		table = new JTable();
+		this.mData = new SQLitetest();
+		this.tableModel = new TableModel(mData);
+		table = new JTable(tableModel);
+
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"patient_id", "Name", "Surname", "Age", "Gender", "PESEL"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, Integer.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		
+		
+		
 		scrollPane.setViewportView(table);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(213, 187, 603, 116);
-		frame.getContentPane().add(scrollPane_1);
 		
 		table_1 = new JTable();
 		table_1.setModel(new DefaultTableModel(
@@ -334,8 +491,56 @@ public class GUI {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		panel_3.setBounds(213, 316, 603, 195);
-		frame.getContentPane().add(panel_3);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+							.addGap(10)
+							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(10)
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)))))
+					.addGap(10))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+							.addGap(10)
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addGap(6))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(17)
+							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		frame.getContentPane().setLayout(groupLayout);
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		addPopup(getFrame(), popupMenu);

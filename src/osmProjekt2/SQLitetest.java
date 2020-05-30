@@ -116,7 +116,6 @@ public class SQLitetest {
 			prep.setString(4, gender);
 			prep.setString(5, pesel);
 			prep.execute();
-			prep.close();
 			
 		} catch (SQLException e) {
 			
@@ -138,7 +137,6 @@ public class SQLitetest {
 			prep.setInt(3, pressure);
 			prep.setInt(4, patient_id);
 			prep.execute();
-			prep.close();
 			
 		}catch(SQLException e) {
 			
@@ -159,7 +157,6 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("DELETE FROM patient WHERE patient_id=?;");
 			prep.setInt(1, patientId);
 			prep.execute();
-			prep.close();
 			
 			
 		} catch (SQLException e) {
@@ -168,7 +165,7 @@ public class SQLitetest {
 		}
 		
 	}
-	// nie wiem czemu kaskadowe usuwanie nie dziala ale imo to by byl tylko taki bajer mozemy obejsc sie bez tego 
+
 	public void deleteExam(int patientId) {
 		
 		if(con==null) {
@@ -180,7 +177,6 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE patient_id=?;");
 			prep.setInt(1, patientId);
 			prep.execute();
-			prep.close();
 			
 			
 		} catch (SQLException e) {
@@ -206,7 +202,6 @@ public class SQLitetest {
 			prep.setString(5,  pesel);
 			prep.setInt(6, patientId);
 			prep.execute();
-			prep.close();
 			
 			
 		} catch (SQLException e) {
@@ -232,7 +227,6 @@ public class SQLitetest {
 			prep.setInt(4,  patientId);
 			prep.setInt(5,  id);
 			prep.execute();
-			prep.close();
 			
 			
 		} catch (SQLException e) {
@@ -273,6 +267,100 @@ public class SQLitetest {
 			e.printStackTrace();
 			return null;
 		}
+		
+	}
+	
+	
+	
+	public int getPatientRowCount() {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("SELECT COUNT(pesel) FROM patient");
+			
+			ResultSet res = prep.executeQuery();
+
+			
+			int sum = res.getInt("COUNT(pesel)");
+			return sum;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return 0;
+		}
+				
+	}
+	
+	public ResultSet getPatient(int patient_id) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM patient WHERE patient_id = ?");
+			prep.setInt(1,	patient_id);
+			ResultSet res = prep.executeQuery();
+			return res;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void updatePatientTable() {
+		
+		if(con==null) {
+			getConnection();
+		}
+		String sql ="SELECT name, surname, age, gender, pesel FROM patient";
+		
+		try {
+			PreparedStatement prep = con.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			Object[] columnData = new Object[5];
+			
+			while(rs.next()) {
+				
+				columnData [0] =rs.getString("name");
+				columnData [1] =rs.getString("surname");
+				columnData [2] =rs.getString("age");
+				columnData [3] =rs.getString("gender");
+				columnData [4] =rs.getString("pesel");
+			}
+			
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+		
 		
 	}
 		
