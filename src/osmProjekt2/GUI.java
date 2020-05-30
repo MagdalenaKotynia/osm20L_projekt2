@@ -72,7 +72,7 @@ public class GUI {
 	protected JDateChooser dateChooser;
 	protected SQLitetest mData;
 	protected TableModel tableModel;
-	
+	protected ExamTableModel examTableModel;
 	
 
 
@@ -438,11 +438,14 @@ public class GUI {
 		
 		
 		scrollPane.setViewportView(table);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
+
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		this.examTableModel = new ExamTableModel(mData);
+		table_1 = new JTable(examTableModel);
+
+		
+/*		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
 				{null, null, null, null, null},
@@ -472,6 +475,9 @@ public class GUI {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		
+		*/
 		scrollPane_1.setViewportView(table_1);
 		
 		JPanel panel_3 = new JPanel();

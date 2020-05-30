@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class TableModel extends AbstractTableModel {
 
-	private String[] columnNames = {"Imie", "Nazwisko", "Wiek", "Plec", "PESEL"};
+	private String[] columnNames = {"patient_id", "Name", "Surname", "Age", "Sex", "PESEL"};
 	protected SQLitetest data;
 	
 	
@@ -40,65 +40,76 @@ public class TableModel extends AbstractTableModel {
 		
 		
 		try {
-		if(columnIndex==0) {
+			if(columnIndex==0) {
+				
+				ResultSet rs = data.getPatient();
+				
+				for(int i=0; i<=rowIndex; i++) {
+					rs.next();
+				}
+				
+				temp = rs.getString("patient_id");
+				
 			
-			ResultSet rs = data.getPatient();
+			}else if(columnIndex==1) {
 			
-			for(int i=0; i<=rowIndex; i++) {
-				rs.next();
+					ResultSet rs = data.getPatient();
+			
+					for(int i=0; i<=rowIndex; i++) {
+						rs.next();
+					}
+			
+					temp = rs.getString("name");
+			
+			}else if(columnIndex==2) {
+				
+				ResultSet rs = data.getPatient();
+				
+				for(int i=0; i<=rowIndex; i++) {
+					rs.next();
+				}
+				
+				temp = rs.getString("surname");
+				
+			}else if(columnIndex==3) {
+				
+				ResultSet rs = data.getPatient();
+				
+				for(int i=0; i<=rowIndex; i++) {
+					rs.next();
+				}
+				
+				temp = rs.getString("age");
+				
+			}else if(columnIndex==4) {
+				
+				ResultSet rs = data.getPatient();
+				
+				for(int i=0; i<=rowIndex; i++) {
+					rs.next();
+				}
+				
+				temp = rs.getString("gender");
+				
+			}else if(columnIndex==5) {
+				
+				ResultSet rs = data.getPatient();
+				
+				for(int i=0; i<=rowIndex; i++) {
+					rs.next();
+				}
+				
+				temp = rs.getString("pesel");
+				
 			}
+			return temp;
 			
-			temp = rs.getString("name");
-			
-		}else if(columnIndex==1) {
-			
-			ResultSet rs = data.getPatient();
-			
-			for(int i=0; i<=rowIndex; i++) {
-				rs.next();
-			}
-			
-			temp = rs.getString("surname");
-			
-		}else if(columnIndex==2) {
-			
-			ResultSet rs = data.getPatient();
-			
-			for(int i=0; i<=rowIndex; i++) {
-				rs.next();
-			}
-			
-			temp = rs.getString("age");
-			
-		}else if(columnIndex==3) {
-			
-			ResultSet rs = data.getPatient();
-			
-			for(int i=0; i<=rowIndex; i++) {
-				rs.next();
-			}
-			
-			temp = rs.getString("gender");
-			
-		}else if(columnIndex==4) {
-			
-			ResultSet rs = data.getPatient();
-			
-			for(int i=0; i<=rowIndex; i++) {
-				rs.next();
-			}
-			
-			temp = rs.getString("pesel");
-			
+				}catch(SQLException e) {
+					e.printStackTrace();
+					return temp;
+				}
+				
 		}
-		return temp;
-		
-			}catch(SQLException e) {
-				e.printStackTrace();
-				return temp;
-			}
-			
-	}
 	
 	public String getColumnName(int col) {
 		return columnNames[col];

@@ -297,6 +297,32 @@ public class SQLitetest {
 				
 	}
 	
+	public int getExamRowCount() {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("SELECT COUNT(id) FROM exam");
+			
+			ResultSet res = prep.executeQuery();
+
+			
+			int sum = res.getInt("COUNT(id)");
+			return sum;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	
+	
 	public ResultSet getPatient() {
 		
 		if(con==null) {
@@ -316,6 +342,28 @@ public class SQLitetest {
 			return null;
 		}
 		
+		
+		
+	}
+	
+	public ResultSet getExam() {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM exam");
+			ResultSet res = prep.executeQuery();
+			return res;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
 		
 		
 	}
