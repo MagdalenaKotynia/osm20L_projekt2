@@ -378,7 +378,7 @@ public class SQLitetest {
 	
 			ResultSet index = getSelectedPatientsId(pesel);
 			int patient_id = index.getInt("patient_id");			
-			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse DESC");
+			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse ASC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
 			String pulse =res.getString("pulse");			
@@ -404,7 +404,7 @@ public class SQLitetest {
 	
 			ResultSet index = getSelectedPatientsId(pesel);
 			int patient_id = index.getInt("patient_id");			
-			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse ASC");
+			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse DESC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
 			String pulse =res.getString("pulse");			
@@ -429,7 +429,7 @@ public class SQLitetest {
 		
 				ResultSet index = getSelectedPatientsId(pesel);
 				int patient_id = index.getInt("patient_id");			
-				PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure DESC");
+				PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure ASC");
 				prep.setInt(1, patient_id);
 				ResultSet res = prep.executeQuery();
 				String pulse =res.getString("pressure");			
@@ -454,7 +454,7 @@ public class SQLitetest {
 	
 			ResultSet index = getSelectedPatientsId(pesel);
 			int patient_id = index.getInt("patient_id");			
-			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure ASC");
+			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure DESC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
 			String pulse =res.getString("pressure");			
