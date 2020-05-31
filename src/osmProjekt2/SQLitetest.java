@@ -1,6 +1,8 @@
 package osmProjekt2;
 import java.sql.*;
 
+import org.jfree.data.jdbc.JDBCCategoryDataset;
+
 public class SQLitetest {
 
 	private static Connection con;
@@ -29,7 +31,7 @@ public class SQLitetest {
 	}
 
 
-	private void getConnection() {
+	private Connection getConnection() {
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -46,7 +48,7 @@ public class SQLitetest {
 		}
 		
 		initialise();
-		
+		return con;
 		
 	}
 
@@ -544,7 +546,65 @@ public class SQLitetest {
 	}
 	
 	
+	public JDBCCategoryDataset getPressureDataSet(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		
+		
+		
+		try {
+			
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");
+			String sql = "SELECT date, pressure FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
+			JDBCCategoryDataset dataset = new JDBCCategoryDataset(getConnection(), sql);
+
+			return dataset;
+			
+			
+			
+		}catch(SQLException e) {
+			
+			return null;
+			
+		}
+		
+			
+	}
 	
+	
+	
+	public JDBCCategoryDataset getPulseDataSet(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		
+		
+		
+		try {
+			
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");
+			String sql = "SELECT date, pulse FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
+			JDBCCategoryDataset dataset = new JDBCCategoryDataset(getConnection(), sql);
+
+			return dataset;
+			
+			
+			
+		}catch(SQLException e) {
+			
+			return null;
+			
+		}
+		
+			
+	}
 	
 	
 	

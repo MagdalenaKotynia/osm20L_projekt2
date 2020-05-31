@@ -9,11 +9,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
-	//	SQLitetest test = new SQLitetest();
+		SQLitetest test = new SQLitetest();
 	//	ResultSet rs;
 	//	int i = test.getPatientRowCount();
-	//	System.out.println(i);
+		String smth = test.getAvgPulse("123456457");
+		System.out.println(smth);
 		
+		PressurePlot plot_1 = new PressurePlot(test, "123456457");
+		PulsePlot plot_2 = new PulsePlot(test, "123456457");
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
