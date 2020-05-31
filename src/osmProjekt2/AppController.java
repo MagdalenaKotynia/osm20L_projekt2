@@ -49,6 +49,18 @@ public class AppController implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+		
+		else { // do podpiecia pod odpowiedni listener chyba Jtable? ----- zeby dzialalo musi byc wypelniony jtextfield z peselem 
+			
+			String pesel = this.view.textField_3.getText();
+			this.view.textField_9.setText(dbModel.getMinPulse(pesel));
+			this.view.textField_10.setText(dbModel.getMaxPulse(pesel));
+			this.view.textField_6.setText(dbModel.getMinPressure(pesel));
+			this.view.textField_7.setText(dbModel.getMaxPressure(pesel));
+			this.view.textField_8.setText(dbModel.getAvgPressure(pesel));
+			this.view.textField_11.setText(dbModel.getAvgPulse(pesel));
+			
+		}
 			
 		}
 

@@ -368,9 +368,180 @@ public class SQLitetest {
 		
 	}
 	
+	public String getMinPulse(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+	
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");			
+			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse DESC");
+			prep.setInt(1, patient_id);
+			ResultSet res = prep.executeQuery();
+			String pulse =res.getString("pulse");			
+			return pulse;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+				
+	}
 	
 	
+	public String getMaxPulse(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
 	
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");			
+			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse ASC");
+			prep.setInt(1, patient_id);
+			ResultSet res = prep.executeQuery();
+			String pulse =res.getString("pulse");			
+			return pulse;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+				
+	}
+	
+	public String getMinPressure(String pesel) {
+			
+			if(con==null) {
+				getConnection();
+			}
+			
+			try {
+		
+				ResultSet index = getSelectedPatientsId(pesel);
+				int patient_id = index.getInt("patient_id");			
+				PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure DESC");
+				prep.setInt(1, patient_id);
+				ResultSet res = prep.executeQuery();
+				String pulse =res.getString("pressure");			
+				return pulse;
+				
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+				return null;
+			}
+					
+		}
+	
+	public String getMaxPressure(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+	
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");			
+			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure ASC");
+			prep.setInt(1, patient_id);
+			ResultSet res = prep.executeQuery();
+			String pulse =res.getString("pressure");			
+			return pulse;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+				
+	}
+	
+	public String getAvgPulse(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		float average = 0;
+		float iter = 0;
+		
+		try {
+	
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");			
+			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=?");
+			prep.setInt(1, patient_id);
+			ResultSet res = prep.executeQuery();
+			while(res.next()) {
+				
+			average=res.getFloat("pulse") + average; 
+			iter++;
+				
+			}
+			
+			average=average/iter;
+			
+			String pulse = String.valueOf(average);			
+			return pulse;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+	}
+	
+	public String getAvgPressure(String pesel) {
+		
+		if(con==null) {
+			getConnection();
+		}
+		float average = 0;
+		float iter = 0;
+		
+		try {
+	
+			ResultSet index = getSelectedPatientsId(pesel);
+			int patient_id = index.getInt("patient_id");			
+			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=?");
+			prep.setInt(1, patient_id);
+			ResultSet res = prep.executeQuery();
+			while(res.next()) {
+				
+			average=res.getFloat("pressure") + average; 
+			iter++;
+				
+			}
+			
+			average=average/iter;
+			
+			String pulse = String.valueOf(average);			
+			return pulse;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+	}
 	
 	
 	

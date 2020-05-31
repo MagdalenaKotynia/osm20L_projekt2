@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.PreparedStatement;
 
 import javax.swing.JTextField;
@@ -41,6 +42,8 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
@@ -58,12 +61,12 @@ public class GUI {
 	protected JTextField textField_3;
 	protected JTextField textField_4;
 	protected JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
+	protected JTextField textField_6;
+	protected JTextField textField_7;
+	protected JTextField textField_8;
+	protected JTextField textField_9;
+	protected JTextField textField_10;
+	protected JTextField textField_11;
 	protected JButton button_2;
 	protected JButton button;
 	private JTable table;
@@ -434,7 +437,8 @@ public class GUI {
 		table = new JTable(tableModel);
 
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
+
 		
 		
 		scrollPane.setViewportView(table);
@@ -567,6 +571,8 @@ public class GUI {
 	public void setController (ActionListener c) {
 		this.button.addActionListener(c);
 		this.button_2.addActionListener(c);
+		
 	}
+
 	
 }
