@@ -118,7 +118,7 @@ public class SQLitetest {
 			prep.setString(4, gender);
 			prep.setString(5, pesel);
 			prep.execute();
-			
+			prep.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -148,7 +148,7 @@ public class SQLitetest {
 		
 	}
 	
-	public void deletePatient(int patientId) { 
+	public void deletePatient(String pesel) { 
 		
 		if(con==null) {
 			getConnection();
@@ -156,8 +156,8 @@ public class SQLitetest {
 		
 		try {
 			
-			PreparedStatement prep = con.prepareStatement("DELETE FROM patient WHERE patient_id=?;");
-			prep.setInt(1, patientId);
+			PreparedStatement prep = con.prepareStatement("DELETE FROM patient WHERE pesel=?;");
+			prep.setString(1, pesel);
 			prep.execute();
 			
 			
@@ -177,7 +177,7 @@ public class SQLitetest {
 		try {
 			
 			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE patient_id=?;");
-			prep.setInt(1, patientId);
+			prep.setInt(1, patientId); 
 			prep.execute();
 			
 			

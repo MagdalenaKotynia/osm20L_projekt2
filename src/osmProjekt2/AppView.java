@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -21,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GUI2 {
+public class AppView {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -38,30 +39,25 @@ public class GUI2 {
 	private JTextField textField_11;
 	private JTable table;
 	private JTable table_1;
-	protected SQLitetest mData;
-	protected TableModel tableModel;
-	protected ExamTableModel examTableModel;
+	private SQLitetest mData;
+	private TableModel tableModel;
+	private ExamTableModel examTableModel;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton_3;
+	private JButton btnNewButton_4;
+	private JButton btnNewButton_5;
+	private JButton btnNewButton_6;
+	private JButton btnNewButton_7;
+	private JComboBox comboBox;
+	private JDateChooser dateChooser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI2 window = new GUI2();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public GUI2() {
+	public AppView() {
 		initialize();
 	}
 
@@ -170,10 +166,10 @@ public class GUI2 {
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
 		
-		JButton btnNewButton_6 = new JButton("Pressure plot");
+		btnNewButton_6 = new JButton("Pressure plot");
 		btnNewButton_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JButton btnNewButton_7 = new JButton("Pulse plot");
+		btnNewButton_7 = new JButton("Pulse plot");
 		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
@@ -264,7 +260,7 @@ public class GUI2 {
 		);
 		panel_2.setLayout(gl_panel_2);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		
 		JLabel lblNewLabel_5 = new JLabel("Date:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -281,13 +277,13 @@ public class GUI2 {
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("Save");
+		btnNewButton_2 = new JButton("Save");
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnNewButton_4 = new JButton("Cancel");
+		btnNewButton_4 = new JButton("Cancel");
 		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnNewButton_5 = new JButton("Delete");
+		btnNewButton_5 = new JButton("Delete");
 		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -358,7 +354,7 @@ public class GUI2 {
 		JLabel lblNewLabel_3 = new JLabel("PESEL:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(gender.values()));
 		
 		JLabel lblNewLabel_4 = new JLabel("Sex:");
@@ -373,13 +369,13 @@ public class GUI2 {
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Save");
+		btnNewButton = new JButton("Save");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
+		btnNewButton_1 = new JButton("Cancel");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnNewButton_3 = new JButton("Delete");
+		btnNewButton_3 = new JButton("Delete");
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -458,6 +454,238 @@ public class GUI2 {
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	
+	
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+	public void setTextField_1(JTextField textField_1) {
+		this.textField_1 = textField_1;
+	}
+
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+
+	public void setTextField_2(JTextField textField_2) {
+		this.textField_2 = textField_2;
+	}
+
+	public JTextField getTextField_3() {
+		return textField_3;
+	}
+
+	public void setTextField_3(JTextField textField_3) {
+		this.textField_3 = textField_3;
+	}
+
+	public JTextField getTextField_4() {
+		return textField_4;
+	}
+
+	public void setTextField_4(JTextField textField_4) {
+		this.textField_4 = textField_4;
+	}
+
+	public JTextField getTextField_5() {
+		return textField_5;
+	}
+
+	public void setTextField_5(JTextField textField_5) {
+		this.textField_5 = textField_5;
+	}
+
+	public JTextField getTextField_6() {
+		return textField_6;
+	}
+
+	public void setTextField_6(JTextField textField_6) {
+		this.textField_6 = textField_6;
+	}
+
+	public JTextField getTextField_7() {
+		return textField_7;
+	}
+
+	public void setTextField_7(JTextField textField_7) {
+		this.textField_7 = textField_7;
+	}
+
+	public JTextField getTextField_8() {
+		return textField_8;
+	}
+
+	public void setTextField_8(JTextField textField_8) {
+		this.textField_8 = textField_8;
+	}
+
+	public JTextField getTextField_9() {
+		return textField_9;
+	}
+
+	public void setTextField_9(JTextField textField_9) {
+		this.textField_9 = textField_9;
+	}
+
+	public JTextField getTextField_10() {
+		return textField_10;
+	}
+
+	public void setTextField_10(JTextField textField_10) {
+		this.textField_10 = textField_10;
+	}
+
+	public JTextField getTextField_11() {
+		return textField_11;
+	}
+
+	public void setTextField_11(JTextField textField_11) {
+		this.textField_11 = textField_11;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public JTable getTable_1() {
+		return table_1;
+	}
+
+	public void setTable_1(JTable table_1) {
+		this.table_1 = table_1;
+	}
+
+	public SQLitetest getmData() {
+		return mData;
+	}
+
+	public void setmData(SQLitetest mData) {
+		this.mData = mData;
+	}
+
+	public TableModel getTableModel() {
+		return tableModel;
+	}
+
+	public void setTableModel(TableModel tableModel) {
+		this.tableModel = tableModel;
+	}
+
+	public ExamTableModel getExamTableModel() {
+		return examTableModel;
+	}
+
+	public void setExamTableModel(ExamTableModel examTableModel) {
+		this.examTableModel = examTableModel;
+	}
+
+	public JButton getBtnNewButton() {
+		return btnNewButton;
+	}
+
+	public void setBtnNewButton(JButton btnNewButton) {
+		this.btnNewButton = btnNewButton;
+	}
+
+	public JButton getBtnNewButton_1() {
+		return btnNewButton_1;
+	}
+
+	public void setBtnNewButton_1(JButton btnNewButton_1) {
+		this.btnNewButton_1 = btnNewButton_1;
+	}
+
+	public JButton getBtnNewButton_2() {
+		return btnNewButton_2;
+	}
+
+	public void setBtnNewButton_2(JButton btnNewButton_2) {
+		this.btnNewButton_2 = btnNewButton_2;
+	}
+
+	public JButton getBtnNewButton_3() {
+		return btnNewButton_3;
+	}
+
+	public void setBtnNewButton_3(JButton btnNewButton_3) {
+		this.btnNewButton_3 = btnNewButton_3;
+	}
+
+	public JButton getBtnNewButton_4() {
+		return btnNewButton_4;
+	}
+
+	public void setBtnNewButton_4(JButton btnNewButton_4) {
+		this.btnNewButton_4 = btnNewButton_4;
+	}
+
+	public JButton getBtnNewButton_5() {
+		return btnNewButton_5;
+	}
+
+	public void setBtnNewButton_5(JButton btnNewButton_5) {
+		this.btnNewButton_5 = btnNewButton_5;
+	}
+
+	public JButton getBtnNewButton_6() {
+		return btnNewButton_6;
+	}
+
+	public void setBtnNewButton_6(JButton btnNewButton_6) {
+		this.btnNewButton_6 = btnNewButton_6;
+	}
+
+	public JButton getBtnNewButton_7() {
+		return btnNewButton_7;
+	}
+
+	public void setBtnNewButton_7(JButton btnNewButton_7) {
+		this.btnNewButton_7 = btnNewButton_7;
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public void setComboBox(JComboBox comboBox) {
+		this.comboBox = comboBox;
+	}
+
+	public JDateChooser getDateChooser() {
+		return dateChooser;
+	}
+
+	public void setDateChooser(JDateChooser dateChooser) {
+		this.dateChooser = dateChooser;
+	}
+
+	public void setController (ActionListener c) {
+		this.btnNewButton.addActionListener(c);
+		this.btnNewButton_1.addActionListener(c);
+		this.btnNewButton_2.addActionListener(c);
+		this.btnNewButton_3.addActionListener(c);
+		this.btnNewButton_4.addActionListener(c);
+		this.btnNewButton_5.addActionListener(c);
+		this.btnNewButton_6.addActionListener(c);
+		this.btnNewButton_7.addActionListener(c);	
+	}
+	public void setMouseListener (MouseListener m) {
+		this.table.addMouseListener(m);
+		this.table_1.addMouseListener(m);
 	}
 
 }
