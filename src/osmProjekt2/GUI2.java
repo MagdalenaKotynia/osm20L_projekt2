@@ -38,6 +38,9 @@ public class GUI2 {
 	private JTextField textField_11;
 	private JTable table;
 	private JTable table_1;
+	protected SQLitetest mData;
+	protected TableModel tableModel;
+	protected ExamTableModel examTableModel;
 
 	/**
 	 * Launch the application.
@@ -120,18 +123,16 @@ public class GUI2 {
 					.addContainerGap())
 		);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
+
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
-			}
-		));
+		this.mData = new SQLitetest();
+		this.tableModel = new TableModel(mData);
+		table = new JTable(tableModel);
 		scrollPane.setViewportView(table);
+		
+		this.examTableModel = new ExamTableModel(mData);
+		table_1 = new JTable(examTableModel);
+		scrollPane_1.setViewportView(table_1);
 		
 		JLabel lblNewLabel_8 = new JLabel("Min pressure:");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -385,9 +386,9 @@ public class GUI2 {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -401,18 +402,18 @@ public class GUI2 {
 									.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
 									.addPreferredGap(ComponentPlacement.RELATED)))
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
 							.addGap(26)
-							.addComponent(comboBox, 0, 104, Short.MAX_VALUE)))
+							.addComponent(comboBox, 0, 103, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -445,7 +446,7 @@ public class GUI2 {
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
 						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 17, Short.MAX_VALUE)
+					.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
