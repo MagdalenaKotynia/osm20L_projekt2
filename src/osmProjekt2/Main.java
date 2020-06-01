@@ -21,10 +21,10 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI window = new GUI();
+					GUI2 window = new GUI2();
 					SQLitetest test = new SQLitetest();
-					AppController ctrl = new AppController(window, test);
-					window.setController(ctrl);
+					//AppController ctrl = new AppController(window, test);
+					//window.setController(ctrl);
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
