@@ -118,7 +118,6 @@ public class SQLitetest {
 			prep.setString(4, gender);
 			prep.setString(5, pesel);
 			prep.execute();
-			//prep.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
