@@ -60,7 +60,8 @@ public class AppController implements ActionListener, MouseListener {
 			}
 		}
 
-		else if (source == this.view.getBtnNewButton_3()) {
+		else if (source == this.view.getBtnNewButton_4()) {
+			clearExamFields();
 			
 		}
 		
@@ -214,6 +215,7 @@ public class AppController implements ActionListener, MouseListener {
 		rs.close();
 	}
 	public void deleteExam() {
+		
 		
 	}
 	public void plotPressure() throws SQLException {
