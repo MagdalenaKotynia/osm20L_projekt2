@@ -23,8 +23,8 @@ public class Main {
 			public void run() {
 				try {
 					AppView window = new AppView();
-					SQLitetest test = new SQLitetest();
-					AppController ctrl = new AppController(window, test);
+					//SQLitetest test = new SQLitetest();
+					AppController ctrl = new AppController(window, window.getmData());
 					window.setController(ctrl);
 					window.setMouseListener(ctrl);
 					window.getFrame().setVisible(true);

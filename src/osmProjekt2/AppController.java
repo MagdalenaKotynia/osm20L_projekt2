@@ -82,7 +82,7 @@ public class AppController implements ActionListener, MouseListener {
 		}
 		
 		
-		else { // do podpiecia pod odpowiedni listener chyba Jtable? ----- zeby dzialalo musi byc wypelniony jtextfield z peselem 
+		/*else { // do podpiecia pod odpowiedni listener chyba Jtable? ----- zeby dzialalo musi byc wypelniony jtextfield z peselem 
 			
 			String pesel = this.view.getTextField_3().getText();
 			this.view.getTextField_9().setText(dbModel.getAvgPressure(pesel));
@@ -92,7 +92,7 @@ public class AppController implements ActionListener, MouseListener {
 			this.view.getTextField_8().setText(dbModel.getMinPulse(pesel));
 			this.view.getTextField_11().setText(dbModel.getAvgPulse(pesel));
 			
-		}
+		}*/
 	
 	}
 	
