@@ -100,6 +100,7 @@ public class TableModel extends AbstractTableModel {
 				}
 				
 				temp = rs.getString("pesel");
+				rs.close();
 				
 			}
 			return temp;

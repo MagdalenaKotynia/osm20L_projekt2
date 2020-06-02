@@ -18,9 +18,9 @@ public class AppController implements ActionListener, MouseListener {
 	private AppView view = null;
 	private SQLitetest dbModel = null;
 	
-	public AppController(AppView view, SQLitetest dbModel) {
+	public AppController(AppView view, SQLitetest data) {
 	this.view = view;
-	this.dbModel = dbModel;
+	this.dbModel = data;
 	}
 
 	@Override

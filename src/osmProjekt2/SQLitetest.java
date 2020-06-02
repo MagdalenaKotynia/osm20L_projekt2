@@ -118,7 +118,7 @@ public class SQLitetest {
 			prep.setString(4, gender);
 			prep.setString(5, pesel);
 			prep.execute();
-			prep.close();
+			//prep.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -144,8 +144,18 @@ public class SQLitetest {
 			
 			e.printStackTrace();
 		}
+		/*finally {
+			if (con != null) {
+			    try {
+			      con.close(); // <-- This is important
+			    }
+			    catch (SQLException e) {
+			     
+			    }
+			}
 		
 		
+		}*/
 	}
 	
 	public void deletePatient(String pesel) { 
@@ -527,7 +537,7 @@ public class SQLitetest {
 				
 			average=res.getFloat("pressure") + average; 
 			iter++;
-			res.close();	
+			//res.close();	
 			}
 			
 			average=average/iter;
@@ -566,11 +576,21 @@ public class SQLitetest {
 			
 			
 			
-		}catch(SQLException e) {
+		}
+		catch(SQLException e) {
 			
 			return null;
 			
 		}
+		/*finally {
+			  if (con != null) {
+			    try {
+			      con.close(); // <-- This is important
+			    } catch (SQLException e) {
+			      
+			    }
+			  }
+		}*/
 		
 			
 	}
