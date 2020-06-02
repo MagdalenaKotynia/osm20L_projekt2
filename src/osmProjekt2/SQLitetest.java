@@ -434,8 +434,8 @@ public class SQLitetest {
 				PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure ASC");
 				prep.setInt(1, patient_id);
 				ResultSet res = prep.executeQuery();
-				String pulse =res.getString("pressure");			
-				return pulse;
+				String pressure =res.getString("pressure");			
+				return pressure;
 				
 				
 			} catch (SQLException e) {
@@ -459,8 +459,8 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure DESC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
-			String pulse =res.getString("pressure");			
-			return pulse;
+			String pressure =res.getString("pressure");			
+			return pressure;
 			
 			
 		} catch (SQLException e) {
@@ -527,7 +527,7 @@ public class SQLitetest {
 				
 			average=res.getFloat("pressure") + average; 
 			iter++;
-				
+			res.close();	
 			}
 			
 			average=average/iter;
@@ -561,7 +561,7 @@ public class SQLitetest {
 			int patient_id = index.getInt("patient_id");
 			String sql = "SELECT date, pressure FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
 			JDBCCategoryDataset dataset = new JDBCCategoryDataset(getConnection(), sql);
-
+			index.close();
 			return dataset;
 			
 			

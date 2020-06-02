@@ -23,7 +23,7 @@ public class PulsePlot extends JFrame {
 		JFreeChart plot = ChartFactory.createLineChart("Pulse Plot", "Date", "Pulse", db.getPulseDataSet(pesel), PlotOrientation.VERTICAL, false, true, true);
 		CategoryPlot plotk =null;
 		renderer = new BarRenderer();
-		ChartFrame frame = new ChartFrame("Pressure Plot", plot);
+		ChartFrame frame = new ChartFrame("Pulse Plot", plot);
 		frame.setVisible(true);
 		frame.setSize(400, 650);
 		

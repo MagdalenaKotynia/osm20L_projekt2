@@ -64,14 +64,32 @@ public class AppController implements ActionListener, MouseListener {
 			
 		}
 		
+		else if (source == this.view.getBtnNewButton_6()) {
+			try {
+				plotPressure();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if (source == this.view.getBtnNewButton_7()) {
+			try {
+				plotPulse();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		else { // do podpiecia pod odpowiedni listener chyba Jtable? ----- zeby dzialalo musi byc wypelniony jtextfield z peselem 
 			
 			String pesel = this.view.getTextField_3().getText();
-			this.view.getTextField_9().setText(dbModel.getMinPulse(pesel));
+			this.view.getTextField_9().setText(dbModel.getAvgPressure(pesel));
 			this.view.getTextField_10().setText(dbModel.getMaxPulse(pesel));
 			this.view.getTextField_6().setText(dbModel.getMinPressure(pesel));
 			this.view.getTextField_7().setText(dbModel.getMaxPressure(pesel));
-			this.view.getTextField_8().setText(dbModel.getAvgPressure(pesel));
+			this.view.getTextField_8().setText(dbModel.getMinPulse(pesel));
 			this.view.getTextField_11().setText(dbModel.getAvgPulse(pesel));
 			
 		}
@@ -197,6 +215,16 @@ public class AppController implements ActionListener, MouseListener {
 	}
 	public void deleteExam() {
 		
+	}
+	public void plotPressure() throws SQLException {
+		String pesel = this.view.getTextField_3().getText();
+		//ResultSet rs = this.dbModel.getSelectedPatientsId(pesel);
+		//int id = (int) rs.getObject(1);
+		PressurePlot plot = new PressurePlot(this.dbModel, pesel);
+	}
+	public void plotPulse() {
+		String pesel = this.view.getTextField_3().getText();
+		PulsePlot plot = new PulsePlot(this.dbModel, pesel);
 	}
 	
 	
