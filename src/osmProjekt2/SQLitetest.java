@@ -96,10 +96,6 @@ public class SQLitetest {
 				
 				e.printStackTrace();
 			}
-			
-
-			
-			
 
 		}
 		
@@ -536,7 +532,6 @@ public class SQLitetest {
 				
 			average=res.getFloat("pressure") + average; 
 			iter++;
-			//res.close();	
 			}
 			
 			average=average/iter;
@@ -569,7 +564,7 @@ public class SQLitetest {
 			ResultSet index = getSelectedPatientsId(pesel);
 			int patient_id = index.getInt("patient_id");
 			String sql = "SELECT date, pressure FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
-			JDBCCategoryDataset dataset = new JDBCCategoryDataset(getConnection(), sql);
+			JDBCCategoryDataset dataset = new JDBCCategoryDataset(this.con, sql);
 			index.close();
 			return dataset;
 			
@@ -610,8 +605,7 @@ public class SQLitetest {
 			ResultSet index = getSelectedPatientsId(pesel);
 			int patient_id = index.getInt("patient_id");
 			String sql = "SELECT date, pulse FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
-			JDBCCategoryDataset dataset = new JDBCCategoryDataset(getConnection(), sql);
-
+			JDBCCategoryDataset dataset = new JDBCCategoryDataset(this.con,sql);
 			return dataset;
 			
 			
