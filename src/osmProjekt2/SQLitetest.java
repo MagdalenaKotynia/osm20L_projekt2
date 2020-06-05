@@ -1,6 +1,8 @@
 package osmProjekt2;
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 public class SQLitetest {
@@ -69,11 +71,11 @@ public class SQLitetest {
 				
 				Statement state1 = con.createStatement();
 				state1.execute("CREATE TABLE patient(patient_id integer,"
-						+"name varchar(60),"+
-						"surname varchar(60),"+
-						"age integer,"+
-						"gender varchar(10),"+
-						"pesel varchar(11) UNIQUE,"+
+						+"name varchar(60) not null,"+
+						"surname varchar(60) not null,"+
+						"age integer not null,"+
+						"gender varchar(10) not null,"+
+						"pesel varchar(11) UNIQUE not null,"+
 						"primary key(patient_id)"+
 						")");
 				
@@ -116,7 +118,11 @@ public class SQLitetest {
 			prep.execute();
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, 
+                    "Patient with given PESEL already exists", 
+                    "ALERT!", 
+                    JOptionPane.WARNING_MESSAGE);
 		}
 		
 	}
@@ -173,7 +179,7 @@ public class SQLitetest {
 		
 	}
 
-	public void deleteExam(int patientId) {
+	public void deleteExams(int patientId) {
 		
 		if(con==null) {
 			getConnection();
@@ -191,6 +197,25 @@ public class SQLitetest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	
+	public void deleteExam(int id) {
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			
+			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE id=?;");
+			prep.setInt(1, id); 
+			prep.execute();	
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	public void updatePatient(int patientId, String name, String surname, int age, String gender, String pesel) {
@@ -276,8 +301,6 @@ public class SQLitetest {
 		}
 		
 	}
-	
-	
 	
 	public int getPatientRowCount() {
 		
@@ -375,6 +398,28 @@ public class SQLitetest {
 		
 	}
 	
+	public ResultSet getExamsPatient(int examId) {
+		if(con==null) {
+			getConnection();
+		}
+		
+		try {
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM exam where id = ?");
+			
+			
+		//	PreparedStatement prep = con.prepareStatement("SELECT * FROM patient where");
+			ResultSet res = prep.executeQuery();
+			return res;
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
 	public String getMinPulse(String pesel) {
 		
 		if(con==null) {
@@ -388,7 +433,11 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse ASC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
-			String pulse =res.getString("pulse");			
+			String pulse = null;
+			while (res.next()) {
+			pulse =res.getString("pulse");
+			}
+			
 			return pulse;
 			
 			
@@ -414,7 +463,11 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=? ORDER BY pulse DESC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
-			String pulse =res.getString("pulse");			
+			String pulse = null;
+			while (res.next()) {
+			pulse =res.getString("pulse");	
+			}
+			
 			return pulse;
 			
 			
@@ -439,7 +492,11 @@ public class SQLitetest {
 				PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure ASC");
 				prep.setInt(1, patient_id);
 				ResultSet res = prep.executeQuery();
-				String pressure =res.getString("pressure");			
+				String pressure = null;
+				while (res.next()) {
+				pressure =res.getString("pressure");	
+				}
+				
 				return pressure;
 				
 				
@@ -464,7 +521,10 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT pressure FROM exam WHERE patient_id=? ORDER BY pressure DESC");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
-			String pressure =res.getString("pressure");			
+			String pressure = null;
+			while (res.next()) {
+			pressure =res.getString("pressure");	
+			}
 			return pressure;
 			
 			
@@ -491,6 +551,7 @@ public class SQLitetest {
 			PreparedStatement prep = con.prepareStatement("SELECT pulse FROM exam WHERE patient_id=?");
 			prep.setInt(1, patient_id);
 			ResultSet res = prep.executeQuery();
+			
 			while(res.next()) {
 				
 			average=res.getFloat("pulse") + average; 
@@ -500,7 +561,8 @@ public class SQLitetest {
 			
 			average=average/iter;
 			
-			String pulse = String.valueOf(average);			
+			String pulse = String.valueOf(average);	
+
 			return pulse;
 			
 			
@@ -536,8 +598,11 @@ public class SQLitetest {
 			
 			average=average/iter;
 			
-			String pulse = String.valueOf(average);			
-			return pulse;
+			String pressure = String.valueOf(average);	
+			if (pressure == null) {
+				pressure = "";
+			}
+			return pressure;
 			
 			
 		} catch (SQLException e) {
@@ -565,7 +630,7 @@ public class SQLitetest {
 			int patient_id = index.getInt("patient_id");
 			String sql = "SELECT date, pressure FROM exam WHERE patient_id="+String.valueOf(patient_id)+" ORDER BY date ASC"; 
 			JDBCCategoryDataset dataset = new JDBCCategoryDataset(this.con, sql);
-			index.close();
+			//index.close();
 			return dataset;
 			
 			

@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import java.awt.EventQueue;
@@ -17,6 +18,7 @@ public class AppController implements ActionListener, MouseListener {
 	
 	private AppView view = null;
 	private SQLitetest dbModel = null;
+	private int id;
 	
 	public AppController(AppView view, SQLitetest data) {
 	this.view = view;
@@ -31,15 +33,30 @@ public class AppController implements ActionListener, MouseListener {
 				addPatientFromForm();
 
 			}
-			catch (Exception e) {
-				e.printStackTrace();
+			catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, 
+	                    "Not all patient data has been entered!", 
+	                    "ALERT!", 
+	                    JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		else if (source == this.view.getBtnNewButton_2()) {
 			try {
 				addExamFromForm();
 			}
-			catch (Exception e) {
+			catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null, 
+		                    "Not all exam data has been entered!", 
+		                    "ALERT!", 
+		                    JOptionPane.WARNING_MESSAGE);
+				//e.printStackTrace();
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, 
+	                    "Incorrect exam data! Pulse and pressure values should be numbers", 
+	                    "ALERT!", 
+	                    JOptionPane.WARNING_MESSAGE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -81,6 +98,14 @@ public class AppController implements ActionListener, MouseListener {
 				e.printStackTrace();
 			}
 		}
+		else if (source == this.view.getBtnNewButton_5()) {
+			try {
+				deleteExam(id);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		/*else { // do podpiecia pod odpowiedni listener chyba Jtable? ----- zeby dzialalo musi byc wypelniony jtextfield z peselem 
@@ -104,7 +129,7 @@ public class AppController implements ActionListener, MouseListener {
 			try {
 				int row = source.rowAtPoint(evt.getPoint());
 				selectPatientFromTable(row);
-
+				showStatistics();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -114,6 +139,8 @@ public class AppController implements ActionListener, MouseListener {
 			try {
 				int row = source.rowAtPoint(evt.getPoint());
 				selectExamFromTable(row);
+				
+				
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -150,7 +177,16 @@ public class AppController implements ActionListener, MouseListener {
 		
 	public void addPatientFromForm() {
 		String agetxt = this.view.getTextField_2().getText();
-		int age = Integer.parseInt(agetxt);
+		int age;
+		try {
+			age = Integer.parseInt(agetxt);
+			}
+			catch (NumberFormatException e)
+			{
+			   age = (Integer) null;
+			}
+
+		
 		String name = this.view.getTextField().getText();
 		String surname = this.view.getTextField_1().getText();
 		String gender = this.view.getComboBox().getSelectedItem().toString();
@@ -170,6 +206,7 @@ public class AppController implements ActionListener, MouseListener {
 		ResultSet rs = dbModel.getSelectedPatientsId(patient_pesel);
 		int patient_id = rs.getInt("patient_id");
 		dbModel.addExam(date, pulse, pressure, patient_id);
+
 	}
 	public void clearPatientFields() {
 		this.view.getTextField().setText(null);
@@ -196,6 +233,18 @@ public class AppController implements ActionListener, MouseListener {
 		this.view.getComboBox().setSelectedItem(gender);
 		
 	}
+	
+	public void selectPatientFromTableByExam(int row, int patient_id) {
+		patient_id = (int)this.view.getTableModel().getValueAt(row, 0);
+	
+		//this.view.getTextField().setText(name);
+		//this.view.getTextField_1().setText(surname);
+		//this.view.getTextField_2().setText(age);
+		//this.view.getTextField_3().setText(pesel);
+		//this.view.getComboBox().setSelectedItem(gender);
+		
+	}
+	
 	public void selectExamFromTable(int row) throws ParseException {
 		String date = (String)this.view.getExamTableModel().getValueAt(row, 1);
 		Date sdf = new SimpleDateFormat("yyyy-MM-dd").parse(date);
@@ -210,12 +259,13 @@ public class AppController implements ActionListener, MouseListener {
 		String pesel = this.view.getTextField_3().getText();
 		ResultSet rs = this.dbModel.getSelectedPatientsId(pesel);
 		int id = (int) rs.getObject(1);
-		this.dbModel.deleteExam(id);
+		this.dbModel.deleteExams(id);
 		this.dbModel.deletePatient(pesel);
 		rs.close();
 	}
-	public void deleteExam() {
+	public void deleteExam(int id) {
 		
+		this.dbModel.deleteExam(id);
 		
 	}
 	public void plotPressure() throws SQLException {
@@ -227,6 +277,26 @@ public class AppController implements ActionListener, MouseListener {
 	public void plotPulse() {
 		String pesel = this.view.getTextField_3().getText();
 		PulsePlot plot = new PulsePlot(this.dbModel, pesel);
+	}
+	
+	public void showStatistics() {
+		String pesel = this.view.getTextField_3().getText();
+		this.view.getTextField_9().setText(dbModel.getMaxPulse(pesel));
+		if (dbModel.getAvgPressure(pesel) == "NaN") {
+			this.view.getTextField_10().setText("");
+		}
+		else {
+			this.view.getTextField_10().setText(dbModel.getAvgPressure(pesel));
+		}
+		this.view.getTextField_6().setText(dbModel.getMinPressure(pesel));
+		this.view.getTextField_7().setText(dbModel.getMinPulse(pesel));
+		this.view.getTextField_8().setText(dbModel.getMaxPressure(pesel));
+		if (dbModel.getAvgPulse(pesel) == "NaN") {
+			this.view.getTextField_11().setText("");
+		}
+		else {
+		this.view.getTextField_11().setText(dbModel.getAvgPulse(pesel));
+		}
 	}
 	
 	
