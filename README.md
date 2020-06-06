@@ -10,6 +10,6 @@
 
 **Zespol:** Magdalena Kotynia Szymon Kruszewski 
 
-**Biblioteki:** jfreechart, sqlite, apachecooms
+**Biblioteki:** jfreechart, sqlite, apache commons, jcalendar 
 
 **Uwagi dodatkowe:** Xxxx
