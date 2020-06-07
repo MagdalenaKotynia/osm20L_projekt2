@@ -71,6 +71,7 @@ public class AppController implements ActionListener, MouseListener {
 		else if (source == this.view.getBtnNewButton_3()) {
 			try {
 				deletePatient();
+				clearPatientFields();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
