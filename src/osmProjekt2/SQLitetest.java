@@ -145,18 +145,7 @@ public class SQLitetest {
 			
 			e.printStackTrace();
 		}
-		/*finally {
-			if (con != null) {
-			    try {
-			      con.close(); // <-- This is important
-			    }
-			    catch (SQLException e) {
-			     
-			    }
-			}
-		
-		
-		}*/
+
 	}
 	
 	public void deletePatient(String pesel) { 
@@ -201,15 +190,17 @@ public class SQLitetest {
 	
 	
 	
-	public void deleteExam(int id) {
+	public void deleteExam(String date, int pulse, int pressure) {
 		if(con==null) {
 			getConnection();
 		}
 		
 		try {
-			
-			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE id=?;");
-			prep.setInt(1, id); 
+			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE date=?;");
+			//AND pulse='pulse' AND pressure='pressure'
+			prep.setString(1, date); 
+			//prep.setInt(2, pulse);
+			//prep.setInt(3, pressure);
 			prep.execute();	
 			
 		} catch (SQLException e) {

@@ -100,7 +100,7 @@ public class AppController implements ActionListener, MouseListener {
 		}
 		else if (source == this.view.getBtnNewButton_5()) {
 			try {
-				deleteExam(id);
+				deleteExam();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -234,6 +234,8 @@ public class AppController implements ActionListener, MouseListener {
 		
 	}
 	
+
+	
 	public void selectPatientFromTableByExam(int row, int patient_id) {
 		patient_id = (int)this.view.getTableModel().getValueAt(row, 0);
 	
@@ -263,10 +265,29 @@ public class AppController implements ActionListener, MouseListener {
 		this.dbModel.deletePatient(pesel);
 		rs.close();
 	}
-	public void deleteExam(int id) {
+	public void deleteExam() {
+		String pressuretxt = this.view.getTextField_4().getText(); //pressure
+		String pulsetxt = this.view.getTextField_5().getText(); //pulse
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(this.view.getDateChooser().getDate());
 		
-		this.dbModel.deleteExam(id);
+		int pressure, pulse;
+		try {
+			pressure = Integer.parseInt(pressuretxt);
+			}
+			catch (NumberFormatException e)
+			{
+			   pressure = (Integer) null;
+			}
 		
+		try {
+			pulse = Integer.parseInt(pulsetxt);
+			}
+			catch (NumberFormatException e)
+			{
+			   pulse = (Integer) null;
+			}
+		this.dbModel.deleteExam(date, pulse, pressure);
 	}
 	public void plotPressure() throws SQLException {
 		String pesel = this.view.getTextField_3().getText();
