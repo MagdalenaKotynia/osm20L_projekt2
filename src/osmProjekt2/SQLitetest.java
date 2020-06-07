@@ -187,9 +187,6 @@ public class SQLitetest {
 		}
 		
 	}
-	
-	
-	
 	public void deleteExam(String date, int pulse, int pressure) {
 		if(con==null) {
 			getConnection();
@@ -197,7 +194,7 @@ public class SQLitetest {
 		
 		try {
 			PreparedStatement prep = con.prepareStatement("DELETE FROM exam WHERE date=?;");
-			//AND pulse='pulse' AND pressure='pressure'
+			//AND pulse=? AND pressure=?
 			prep.setString(1, date); 
 			//prep.setInt(2, pulse);
 			//prep.setInt(3, pressure);
@@ -366,6 +363,7 @@ public class SQLitetest {
 		
 		
 	}
+
 	
 	public ResultSet getExam() {
 		

@@ -12,4 +12,5 @@
 
 **Biblioteki:** jfreechart, sqlite, apache commons, jcalendar 
 
-**Uwagi dodatkowe:** Xxxx
+**Uwagi dodatkowe:** Opis projektu: 
+Aplikacja umozliwia przeglad danych pacjentow oraz badan pacjentow w tabelach. Lewy panel umozliwia dodanie pacjenta oraz dodanie badania do pacjenta po wybraniu pacjenta z tabeli pacjentow. Mozliwe jest usuniecie pacjenta wraz z jego badaniami po wybraniu pacjenta z listy i kliknieciu "delete" w panelu pacjenta. Mozna tez usunac pojedyncze badanie po wybraniu badania z tabeli badan i kliknieciu "delete" w panelu badania. Przyciski "cancel" w panelach badania i pacjenta umozliwiaja wyczyszczenie pol i tym samym anulowanie operacji. Po wybraniu pacjenta z tabeli w dolnej czesci okienka aplikacji pojawiaja sie statystyki badan pulsu i cisnienia pacjenta. Po wybraniu przycisku "pressure plot" lub "pulse plot" wyswietli sie wykres ze statystykami pacjenta odpowiednio cisnienia i pulsu.
